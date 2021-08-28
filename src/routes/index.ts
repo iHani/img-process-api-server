@@ -1,6 +1,6 @@
-import express from 'express';
-import images from './api/images';
-import library from './api/library';
+import express from "express";
+import images from "./api/images";
+import library from "./api/library";
 
 const routes = express.Router();
 
