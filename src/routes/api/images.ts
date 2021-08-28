@@ -1,38 +1,26 @@
-import express, { Request, Response } from 'express';
-import multer from 'multer';
+import express, { Request, Response } from "express";
+import path from "path";
+// import { existsSync, access } from "fs";
+// import { promises as fs } from "fs";
+
 
 const images = express.Router();
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '/tmp/my-uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-})
+images.get("/", async (req: Request, res: Response): Promise<void> => {
+  const {
+    query: { name, h, w },
+  } = req;
 
-const imageUpload = multer({ storage })
-// const imageUpload = multer({
-//     dest: 'full',
-// });
+  const dirPath = path.join(__dirname, "../../../images/full", `${name}.jpg`);
 
-
-images.get('/', (req: Request, res: Response) => {
-    const { query: { name, h, w } } = req;
-    // if (name == null) {
-    //     res.send(`Error no file name provided!`);
-    // }
-    // if (h == null && w == null) {
-    //     // send original file 
-    //     res.send(`ORIGINAL file name!`);
-    // }
-    res.send(`img: ${name} h:${h} w:${w}`);
-});
-
-images.post('/upload', imageUpload.single('images'), (req, res) => {
-    console.log("req.file", req.file);
-    res.json('/images/upload api');
+  // if (existsSync(dirPath)) {
+  //   res.write(`File exists: ${name}`);
+  // } else {
+  //   res.write(`does NOT exist ${name}`);
+  // }
+  // res.write(`name=${name} w=${w} h=${h}`);
+  res.sendFile(dirPath);
+  // res.end();
 });
 
 export default images;

@@ -10,5 +10,7 @@ app.use(morgan('dev'));
 app.use("/api", routes);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
+// console.log(__dirname + "/images/full");
+// console.log("process.cwd()", process.cwd())
