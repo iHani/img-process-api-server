@@ -1,25 +1,15 @@
-import express, { Request, Response } from "express";
-import path from "path";
-// import { existsSync, access } from "fs";
-// import { promises as fs } from "fs";
+import { Router, Request, Response } from "express";
 
-const images = express.Router();
+import { validateReq } from "../../middleware/validateReq";
+import { serveCached } from "../../middleware/serveCached";
+import { processImage } from "../../middleware/processImage";
 
-images.get("/", async (req: Request, res: Response): Promise<void> => {
-    const {
-        query: { name, h, w },
-    } = req;
+const images = Router();
 
-    const dirPath = path.join(__dirname, "../../../images/full", `${name}.jpg`);
-
-    // if (existsSync(dirPath)) {
-    //   res.write(`File exists: ${name}`);
-    // } else {
-    //   res.write(`does NOT exist ${name}`);
-    // }
-    // res.write(`name=${name} w=${w} h=${h}`);
-    res.sendFile(dirPath);
-    // res.end();
-});
-
-export default images;
+export default images.get(
+  "/",
+  [validateReq, serveCached, processImage],
+  (req: Request, res: Response): void => {
+    res.status(200).send("OK");
+  }
+);

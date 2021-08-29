@@ -1,10 +1,8 @@
-import express from "express";
+import { Router } from "express";
 import images from "./api/images";
-import library from "./api/library";
 
-const routes = express.Router();
+const routes = Router();
 
 routes.use("/images", images);
-routes.use("/library", library);
 
 export default routes;
