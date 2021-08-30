@@ -1,26 +1,28 @@
-import express from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 import { existsSync } from "fs";
 import path from "path";
 
 const cachedDir = "../../images/cached/";
 
-export const serveCached = (
-  req: express.Request,
-  res: express.Response,
-  next: Function
+export const serveCached: RequestHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
 ): void => {
-  const { name, h, w } = req.query;
-  const height: number = parseInt(`${h}`);
-  const width: number = parseInt(`${w}`);
-  const cachedImg: string = path.join(
-    __dirname,
-    cachedDir,
-    `/${height}x${width}/${name}.jpg`
-  );
+    const { name, h, w } = req.query;
+    const height: number | typeof NaN = parseInt(`${h}`);
+    const width: number | typeof NaN = parseInt(`${w}`);
+    const cachedImg: string = path.join(
+        __dirname,
+        cachedDir,
+        `/${height}x${width}/${name}.jpg`
+    );
 
-  if (existsSync(cachedImg)) {
-    res.sendFile(cachedImg);
-  }
-
-  next();
+    if (existsSync(cachedImg)) {
+        console.log(name, " cached");
+        res.sendFile(cachedImg);
+    } else {
+        console.log(name, " not cached");
+        next();
+    }
 };

@@ -6,8 +6,9 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "npx tsc",
+    "prettier": "prettier --config .prettierrc \"**/*.{ts,tsx}\" --write",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "prettier": "prettier --config .prettierrc \"**/*.{ts,tsx}\" --write"
+    "prtlnt": "npm run prettier && npm run lint"
   },
   "keywords": [],
   "author": "",
