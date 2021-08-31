@@ -1,6 +1,9 @@
 # Image Processing API
 
-API to serve images as placeholder at any size for fast prototyping. Place your images at `/images/full` and get them resized via HTTP request. Example: `http://127.0.0.1/api/image?name=nature&h=50&w=50`
+API to serve images as placeholder at any size for fast prototyping. Place your images at `/images/full` and get them resized via HTTP request. 
+
+
+Example: `http://127.0.0.1:9000/api/image?name=nature&h=50&w=50`
 
 # Get Started
 
