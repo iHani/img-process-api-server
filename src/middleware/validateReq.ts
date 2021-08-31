@@ -10,6 +10,8 @@ export const validateReq: RequestHandler = (
 ): void => {
   const { name, h, w } = req.query;
   const originalImg: string = path.join(__dirname, fullDir, `${name}.jpg`);
+  const height = parseInt(`${h}`);
+  const width = parseInt(`${w}`);
 
   if (name === undefined) {
     res.status(406).send("Error: Image name is missing from query strings!");
@@ -17,8 +19,8 @@ export const validateReq: RequestHandler = (
     res.status(404).send(`Error: Image ${name}.jpg is not found!`);
   } else if (!(h && w)) {
     res.sendFile(originalImg);
-  } else if (isNaN(parseInt(`${h}`)) || isNaN(parseInt(`${w}`))) {
-    res.status(406).send("Error: Please provide numeric values for h and w");
+  } else if (isNaN(height) || isNaN(width) || height < 1 || width < 1) {
+    res.status(406).send("Error: Please provide anumeric values for h and w");
   } else {
     next();
   }
