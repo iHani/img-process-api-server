@@ -15,7 +15,7 @@ export const validateReq: RequestHandler = (
   if (name === undefined) {
     res.status(406).send("Error: Image name is missing from query strings!");
   } else if (!existsSync(originalImg)) {
-    res.status(404).send(`Sorry can't find image ${name}.jpg!`);
+    res.status(404).send(`Error: Image ${name}.jpg is not found!`);
   } else if (!(h && w)) {
     res.sendFile(originalImg);
   } else if (isNaN(parseInt(`${h}`)) || isNaN(parseInt(`${w}`))) {
