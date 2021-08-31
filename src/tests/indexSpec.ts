@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync } from "fs";
+import { existsSync } from "fs";
 import path from "path";
 import supertest from "supertest";
 
@@ -11,11 +11,10 @@ import { ImageOptions } from "../types";
 describe("Test resizing image", () => {
   it("should create a resized image", async () => {
     const name = "fjord";
-    const height = 430;
-    const width = 613;
+    const height = 50;
+    const width = 50;
     const originalImg: string = path.join(__dirname, fullDir, `${name}.jpg`);
-    const thumbDir = `./images/cached/${height}x${width}`;
-    const outputDir = `${thumbDir}/${name}.jpg`;
+    const outputDir = `./images/cached/${height}x${width}/${name}.jpg`;
     const cachedImg: string = path.join(
       __dirname,
       cachedDir,
@@ -27,9 +26,6 @@ describe("Test resizing image", () => {
       width,
       outputDir,
     };
-    if (!existsSync(thumbDir)) {
-      mkdirSync(thumbDir);
-    }
 
     await resizeImage(imageOptions);
     expect(existsSync(cachedImg)).toBe(true);

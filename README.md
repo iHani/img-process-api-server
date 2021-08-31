@@ -14,8 +14,9 @@ Build `npm run build`
 
 Test `npm test`
 
-The server should be running on ``http://127.0.0.1:9000/`
-Example: `http://127.0.0.1:9000/api/image?name=nature&h=50&w=50`
+The server should be running on `http://127.0.0.1:9000/`
+
+Example: `http://127.0.0.1:9000/api/images?name=fjord&h=50&w=50`
 # License
 
 MIT
