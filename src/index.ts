@@ -6,7 +6,7 @@ const port = 9000;
 
 app.use("/api", routes);
 
-app.get("/", (req: Request, res: Response): void => {
+export default app.get("/", (req: Request, res: Response): void => {
   res.send("Server Running");
 });
 
