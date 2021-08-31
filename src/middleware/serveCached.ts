@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { existsSync } from "fs";
 import path from "path";
-
-const cachedDir = "../../images/cached/";
+import { cachedDir } from "./constants";
 
 export const serveCached: RequestHandler = (
   req: Request,

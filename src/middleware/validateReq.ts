@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { existsSync } from "fs";
 import path from "path";
-
-const fullDir = "../../images/full/";
+import { fullDir } from "./constants";
 
 export const validateReq: RequestHandler = (
   req: Request,

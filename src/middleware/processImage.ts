@@ -3,9 +3,7 @@ import { existsSync, mkdirSync } from "fs";
 import path from "path";
 import resizeImage from "../services/resizeImage";
 import { ImageOptions } from "../types";
-
-const fullDir = "../../images/full";
-const cachedDir = "../../images/cached";
+import { fullDir, cachedDir } from "./constants";
 
 export const processImage: RequestHandler = async (
   req: Request,
