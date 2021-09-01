@@ -20,7 +20,7 @@ export const validateReq: RequestHandler = (
   } else if (!(h && w)) {
     res.sendFile(originalImg);
   } else if (isNaN(height) || isNaN(width) || height < 1 || width < 1) {
-    res.status(406).send("Error: Please provide anumeric values for h and w");
+    res.status(406).send("Error: Please provide a positive anumeric values for h and w");
   } else {
     next();
   }
