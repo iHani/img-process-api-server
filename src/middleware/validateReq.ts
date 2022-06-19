@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { existsSync } from "fs";
 import path from "path";
-import { fullDir } from "./constants";
+import { fullDir } from "../../constants";
 
 export const validateReq: RequestHandler = (
   req: Request,
@@ -9,7 +9,7 @@ export const validateReq: RequestHandler = (
   next: NextFunction
 ): void => {
   const { name, h, w } = req.query;
-  const originalImg: string = path.join(__dirname, fullDir, `${name}.jpg`);
+  const originalImg: string = path.join(fullDir, `${name}.jpg`);
   const height = parseInt(`${h}`);
   const width = parseInt(`${w}`);
 
@@ -20,7 +20,9 @@ export const validateReq: RequestHandler = (
   } else if (!(h && w)) {
     res.sendFile(originalImg);
   } else if (isNaN(height) || isNaN(width) || height < 1 || width < 1) {
-    res.status(406).send("Error: Please provide a positive anumeric values for h and w");
+    res
+      .status(406)
+      .send("Error: Please provide a positive anumeric values for h and w");
   } else {
     next();
   }

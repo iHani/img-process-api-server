@@ -3,7 +3,7 @@ import { existsSync, mkdirSync } from "fs";
 import path from "path";
 import resizeImage from "../services/resizeImage";
 import { ImageOptions } from "../types";
-import { fullDir, cachedDir } from "./constants";
+import { fullDir, cachedDir } from "../../constants";
 
 export const processImage: RequestHandler = async (
   req: Request,
@@ -12,7 +12,7 @@ export const processImage: RequestHandler = async (
   const { name, h, w } = req.query;
   const height: number = parseInt(`${h}`);
   const width: number = parseInt(`${w}`);
-  const originalImg: string = path.join(__dirname, fullDir, `${name}.jpg`);
+  const originalImg: string = path.join(fullDir, `${name}.jpg`);
   const thumbDir = `./images/cached/${height}x${width}`;
   const outputDir = `${thumbDir}/${name}.jpg`;
 
@@ -33,7 +33,6 @@ export const processImage: RequestHandler = async (
   }
 
   const resizedImage: string = path.join(
-    __dirname,
     cachedDir,
     `${height}x${width}/${name}.jpg`
   );

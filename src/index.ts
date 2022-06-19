@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import express, { Request, Response } from "express";
 import routes from "./routes";
 
@@ -6,10 +7,12 @@ const port = 9000;
 
 app.use("/api", routes);
 
-export default app.get("/", (req: Request, res: Response): void => {
+export default app.get("/", (_req: Request, res: Response): void => {
   res.send("Server Running");
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
+
+export const destroyServer = async () => await server.close();

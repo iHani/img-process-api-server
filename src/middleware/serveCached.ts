@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { existsSync } from "fs";
 import path from "path";
-import { cachedDir } from "./constants";
+import { cachedDir } from "../../constants";
 
 export const serveCached: RequestHandler = (
   req: Request,
@@ -12,7 +12,6 @@ export const serveCached: RequestHandler = (
   const height: number | typeof NaN = parseInt(`${h}`);
   const width: number | typeof NaN = parseInt(`${w}`);
   const cachedImg: string = path.join(
-    __dirname,
     cachedDir,
     `/${height}x${width}/${name}.jpg`
   );
