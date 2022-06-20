@@ -5,6 +5,10 @@ import resizeImage from "../services/resizeImage";
 import { ImageOptions } from "../types";
 import { fullDir, cachedDir } from "../../constants";
 
+if (!existsSync(cachedDir)) {
+  mkdirSync(cachedDir);
+}
+
 export const processImage: RequestHandler = async (
   req: Request,
   res: Response

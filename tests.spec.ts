@@ -1,4 +1,4 @@
-import { existsSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
 import path from "path";
 import supertest from "supertest";
 
@@ -6,10 +6,13 @@ import app from "./src/index";
 import resizeImage from "./src/services/resizeImage";
 import { ImageOptions } from "./src/types";
 import { destroyServer } from "./src/index";
-// import { fullDir, cachedDir } from "../constants";
 
 export const fullDir = path.join(__dirname, "images/full");
 export const cachedDir = path.join(__dirname, "images/cached");
+
+if (!existsSync(cachedDir)) {
+  mkdirSync(cachedDir);
+}
 
 let request = supertest(app);
 
